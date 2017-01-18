@@ -26,3 +26,26 @@ $ sudo pip install awscli --ignore-installed six
 
 ## For more details go to below link
 http://docs.aws.amazon.com/cli/latest/userguide/installing.html#install-bundle-other-os
+
+
+Accessing S3 buckets
+$ aws s3 ls
+
+Configure aws cli
+$ aws configure
+
+Access S3 buckets
+$ aws s3 ls
+
+
+Locaate the credentials 
+$ cd ~
+$ ls
+$ ll
+$ cd .aws
+$ nano credentials
+ 
+Delete credentials
+$ rm -rf credentials
+
+Terminate the instance
