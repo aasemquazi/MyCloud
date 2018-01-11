@@ -1,0 +1,79 @@
+************************************************************
+		Cloudwatch Log Mointoring
+************************************************************
+
+
+
+----*** Create IAM role ***----
+
+
+* Go to IAM 
+
+* Go to policies -> Create policy -> Select JSON
+
+* Enter the following policy
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams"
+    ],
+      "Resource": [
+        "arn:aws:logs:*:*:*"
+    ]
+  }
+ ]
+}
+
+
+* Press -> Review policy
+
+* Give name to policy 
+
+* Create Policy
+
+* Go to Roles -> Create Roles -> Select EC2
+
+* In permissions select the policy that you created above.
+
+* Create role
+
+* Attach the role to the EC2 instance
+
+
+
+----*** Install Cloudwatch logs agent ***----
+
+
+$ sudo apt-get update
+
+$ curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
+
+$ sudo python3 ./awslogs-agent-setup.py --region us-east-1 
+
+Note : Enter the information as prompted
+
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]:
+Default region name [us-east-1]:
+Default output format [None]:
+Path of log file to upload [/var/log/syslog]:
+Destination Log Group name [/var/log/syslog]:
+Choose Log Stream name:                                                                                                   
+1. Use EC2 instance id.                                                                                                 
+2. Use hostname.                                                                                                        
+3. Custom.
+Enter choice [1]: 2
+Choose Log Event timestamp format:  
+                                                                                                                      
+Choose initial position of upload:                                                                                        
+1. From start of file.                                                                                                  
+2. From end of file.                                                                                                  
+Enter choice [1]: 1  
+
