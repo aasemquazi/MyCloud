@@ -1,0 +1,51 @@
+************************************************************
+		            Cloudwatch RAM Mointoring
+************************************************************
+
+
+----*** Create IAM role ***----
+
+* Go to IAM 
+
+* Create Role
+
+* Under permission - tick - CloudwatchFullAccess
+
+* Attach role to the EC2 instance
+
+
+----*** Configure Monitoring Script ***----
+
+
+$ sudo apt-get update
+
+$ sudo apt-get install unzip
+
+$ sudo apt-get install libwww-perl libdatetime-perl
+
+$ curl https://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.2.zip -O
+
+$ unzip CloudWatchMonitoringScripts-1.2.2.zip && \
+rm CloudWatchMonitoringScripts-1.2.2.zip && \
+cd aws-scripts-mon
+
+
+## Test the script
+
+$ ./mon-put-instance-data.pl --mem-util --verify --verbose
+
+
+## Send metric to cloudwatch
+
+$ ./mon-put-instance-data.pl --mem-used-incl-cache-buff --mem-util --mem-used --mem-avail
+
+
+## Scheduling the process of sending metrics
+
+$ crontab -e
+
+*/5 * * * * ~/aws-scripts-mon/mon-put-instance-data.pl --mem-used-incl-cache-buff --mem-util --disk-space-util --disk-path=/ --from-cron
+
+
+## Go on CloudWatch and check for metrics
+
