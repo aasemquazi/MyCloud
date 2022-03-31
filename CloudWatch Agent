@@ -12,7 +12,7 @@
 * Under permission - tick - CloudWatchAgentServerPolicy
 
 * Attach role to the EC2 instance
-
+(Allow HTTPS from firewall)
 
 
 ----*** Configure the Agent ***----
