@@ -1,0 +1,39 @@
+************************************************************
+		                Cloudwatch Agent
+************************************************************
+
+
+----*** Create IAM role ***----
+
+* Go to IAM 
+
+* Create Role
+
+* Under permission - tick - CloudWatchAgentServerPolicy
+
+* Attach role to the EC2 instance
+
+
+
+----*** Configure the Agent ***----
+
+
+$ sudo apt-get update
+
+## Download the CloudWatch agent package
+$ wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+
+## Install the package
+# sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
+
+## Configure the CloudWatch agent
+$ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
+>> CollectD - no
+>> SSM - no
+
+## Start the CloudWatch agent
+$ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
+
+## Generate stress on system
+$ sudo apt install stress
+$ stress --cpu 1
