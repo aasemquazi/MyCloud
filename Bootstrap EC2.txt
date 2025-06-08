@@ -3,3 +3,5 @@ sudo su
 apt-get update -y
 apt install apache2 -y
 service apache2 start
+
+# We can use bootstraping to create a server, take a snapshot of the volume and save the AMI so that we have a copy of the server configuration.
