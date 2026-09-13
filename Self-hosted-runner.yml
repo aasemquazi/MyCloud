@@ -1,0 +1,16 @@
+name: Test Self-Hosted Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: [self-hosted, ec2, linux]   
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Confirm runner details
+        run: |
+          echo "Running on: $(hostname)"
+          echo "Private IP: $(hostname -I)"
+          whoami
